@@ -1,0 +1,61 @@
+@font-face {
+    font-family: 'Space Grotesk';
+    src: url(../font/SpaceGrotesk-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: 'Cookie Monster';
+    src: url(../font/Cookiemonster-gv11.ttf);
+}
+
+:root {
+    --white: #fff;
+    --black: #000;
+    --black-offset: #444;
+    --gray: #D9D9D9;
+    --red: #C83C4F;
+    --yellow: #FFE185;
+    --green: #009F9C;
+    --light-green: #75CF6D;
+    --blue: #6D7EB5;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Space Grotesk', sans-serif;
+    background-image: url('../images/bg.png');
+    background-size: cover;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+button {
+    color: var(--black);
+    text-align: center;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border-radius: 92px;
+    border: 3px solid var(--black);
+    background: var(--white);
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.7;
+}
+
+.center {
+    text-align: center;
+}
+
+.svg-expand {
+    content: url("../svg/expand-btn.svg");
+}

@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="../style/test.css">
+
+<div id="test-container">
+    <div class="center container">
+        <div class="big-box">
+            <div class="small-text">
+                <p>*Do not refresh the page!</p>
+            </div>
+
+            <div class="color-palette" id="color-palette">
+                <div class="color" onclick="changeColor('#000000')" style="background-color: #000000;"></div>
+                <div class="color" onclick="changeColor('#FF0000')" style="background-color: #FF0000;"></div>
+                <div class="color" onclick="changeColor('#00FF00')" style="background-color: #00FF00;"></div>
+                <div class="color" onclick="changeColor('#0000FF')" style="background-color: #0000FF;"></div>
+                <div class="color" onclick="changeColor('#FFFF00')" style="background-color: #FFFF00;"></div>
+                <div class="color" onclick="changeColor('#FF00FF')" style="background-color: #FF00FF;"></div>
+                <div class="color" onclick="changeColor('#00FFFF')" style="background-color: #00FFFF;"></div>
+                <div class="color" onclick="changeColor('#808080')" style="background-color: #808080;"></div>
+            </div>
+            <canvas id="canvas">Your browser does not support drawing canvas</canvas>
+            <div class="fullscreen-btn svg-expand" id="fullscreen-btn" onclick="toggleFullScreen()"></div>
+        </div>
+
+        <div class="small-box">
+            <p id="timer">00:00</p>
+            <div class="buttons">
+                <button class="give-up-btn" onclick="giveUp()">give up</button>
+                <button class="submit-btn" onclick="submit()">submit</button>
+            </div>
+        </div>
+    </div>
+</div>

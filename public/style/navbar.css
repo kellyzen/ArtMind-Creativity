@@ -1,0 +1,23 @@
+@import "style.css";
+
+.logo img {
+    width: 20vh;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.tabs {
+    display: flex;
+}
+
+.tab {
+    margin-right: 8vh;
+    text-decoration: none;
+    color: var(--black-offset);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.tab:hover {
+    text-decoration: underline !important;
+}
