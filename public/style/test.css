@@ -18,6 +18,117 @@ body {
     /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
+/* Popup Box */
+.modal-wrapper {
+	display: flex;
+	z-index: 999;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	visibility: hidden;
+	top: 0;
+	left: 0;
+	background: var(--black-offset);
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	&.open{
+		visibility: visible;
+        opacity: 0.9;
+	}
+}
+
+.modal {
+	padding: 20px 40px;
+	display: block;
+	height: max-content;
+	width: 35%;
+	position: relative;
+	margin: auto;
+	background: var(--yellow);
+    border-radius: 8px;
+    border: 3px solid var(--black);
+    text-align: center;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	-ms-transform: scale(0.7);
+   -webkit-transform: scale(0.7);
+   transform: scale(0.7);
+}
+
+.modal-wrapper.open .modal {
+	opacity: 1;
+	filter: alpha(opacity=100);
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+
+}
+
+.modal-header {
+    display: flex;
+}
+
+.modal-header .svg {
+    width: 20%;
+}
+
+.modal-header p{
+    font-weight: 700;
+    font-size: 36px;
+    letter-spacing: 5px;
+    margin-left: 15px;
+    text-align: left;
+    align-self: center;
+}
+
+.modal-body p{
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--black-offset);
+}
+
+.modal-body input{
+    margin-top: 20px;
+    transform: scale(1.5);
+}
+
+.modal-body label{
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--black-offset);
+    margin: 10px;
+}
+
+.modal-body label a {
+    text-decoration: underline;
+}
+
+.modal-body label a:hover {
+    opacity: 0.7;
+}
+
+.modal-footer {
+    margin: 15px;
+}
+
+.modal-footer p{
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--black-offset);
+}
+
+.start-btn {
+    background: var(--blue);
+    margin-right: 15px;
+    padding: 10px 40px;
+}
+
+
+/* Test Page */
 canvas {
     width: 100%;
     height: 50vh;
@@ -35,7 +146,7 @@ canvas {
 
 .small-text {
     text-align: right;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 18px;
     color: var(--black-offset);
 }
@@ -52,10 +163,11 @@ canvas {
     display: inline;
     font-size: 30px;
     font-weight: 700;
+    letter-spacing: 5px;
 }
 
 .give-up-btn, .submit-btn {
-    padding: 15px 50px;
+    padding: 10px 40px;
 }
 
 .give-up-btn {
@@ -73,14 +185,14 @@ canvas {
     left: 20px;
     display: flex;
     margin: 5vh 15vh;
+    border: 3px solid var(--black);
+    border-radius: 5px;
     z-index: 1;
 }
 
 .color {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-    border: 3px solid var(--black);
+    width: 30px;
+    height: 30px;
     cursor: pointer;
 }
 

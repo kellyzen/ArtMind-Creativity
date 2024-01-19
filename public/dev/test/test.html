@@ -1,6 +1,38 @@
 <link rel="stylesheet" href="../style/test.css">
 
 <div id="test-container">
+    <div id="modal-start" class="modal-wrapper">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="svg-edit svg"></span>
+                <p>Incomplete Figure Test</p>
+            </div>
+            <div class="modal-body">
+                <p>Make sure you have read the instructions!</p>
+                <input type="checkbox" id="tnc" name="tnc">
+                <label for="tnc">I agree to the <a>terms and conditions</a> stated.</label>
+            </div>
+            <div class="modal-footer">
+                <button class="start-btn" id="start-btn" onclick="startTest()">let's start!</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-end" class="modal-wrapper">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="svg-timer svg"></span>
+                <p>Times Up!</p>
+            </div>
+            <div class="modal-body">
+                <p>We will direct you to the result page once the evaluation is complete.</p>
+            </div>
+            <div class="modal-footer">
+                <p>*Do not refresh the page!</p>
+            </div>
+        </div>
+    </div>
+
     <div class="center container">
         <div class="big-box">
             <div class="small-text">
@@ -22,7 +54,7 @@
         </div>
 
         <div class="small-box">
-            <p id="timer">00:00</p>
+            <p id="timer">1:00</p>
             <div class="buttons">
                 <button class="give-up-btn" onclick="giveUp()">give up</button>
                 <button class="submit-btn" onclick="submit()">submit</button>

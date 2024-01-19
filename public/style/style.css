@@ -38,7 +38,7 @@ nav {
 button {
     color: var(--black);
     text-align: center;
-    font-size: 24px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -57,5 +57,13 @@ button:hover {
 }
 
 .svg-expand {
-    content: url("../svg/expand-btn.svg");
+    content: url("../svg/expand-icon.svg");
+}
+
+.svg-edit {
+    content: url("../svg/edit-icon.svg");
+}
+
+.svg-timer {
+    content: url("../svg/timer-icon.svg");
 }
