@@ -54,6 +54,40 @@ function getCursorPosition(event) {
     };
 }
 
+// Draw 6x3 grid of black circles
+let circlesAdded = 0;
+const circleRadius = 60;
+const circleMargin = 40;
+function drawCircles() {
+    for (let i = 0; i < 6; i++) {
+        for (let j = 0; j < 3; j++) {
+            const x = i * circleMargin + circleRadius * 2 * i + circleMargin;
+            const y = j * circleMargin + circleRadius * 2 * j + circleMargin;
+
+            const scaledX = toScreenX(x);
+            const scaledY = toScreenY(y);
+            const scaledRadius = circleRadius * scale;
+
+            context.beginPath();
+            context.arc(scaledX, scaledY, scaledRadius, 0, 2 * Math.PI);
+            context.strokeStyle = '#000';
+            context.lineWidth = 5;
+            context.stroke();
+
+            // if (circlesAdded < 18) {
+            //     drawings.push({
+            //         x0: scaledX - scaledRadius,
+            //         y0: scaledY - scaledRadius,
+            //         x1: scaledX + scaledRadius,
+            //         y1: scaledY + scaledRadius,
+            //         color: '#000'
+            //     });
+            //     circlesAdded++;
+            // }
+        }
+    }
+}
+
 function redrawCanvas() {
     // set the canvas to the size of the window
     canvas.width = document.body.clientWidth;
@@ -61,6 +95,8 @@ function redrawCanvas() {
 
     context.fillStyle = '#fff';
     context.fillRect(0, 0, canvas.width, canvas.height);
+    drawCircles();
+
     for (let i = 0; i < drawings.length; i++) {
         const line = drawings[i];
         drawLine(toScreenX(line.x0), toScreenY(line.y0), toScreenX(line.x1), toScreenY(line.y1), line.color);
@@ -69,7 +105,7 @@ function redrawCanvas() {
 redrawCanvas();
 
 // draw with selected color
-let currentColor = '#000000';
+let currentColor = '#000';
 function drawLine(x0, y0, x1, y1, color) {
     context.beginPath();
     context.moveTo(x0, y0);

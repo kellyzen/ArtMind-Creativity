@@ -1,5 +1,3 @@
-@import "style.css";
-
 body {
     /* Prevent document pinch-zoom & touch-hold-to-highlight */
     touch-action: none;
@@ -94,6 +92,7 @@ body {
 .modal-body input{
     margin-top: 20px;
     transform: scale(1.5);
+    cursor: pointer;
 }
 
 .modal-body label{
@@ -105,6 +104,7 @@ body {
 
 .modal-body label a {
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .modal-body label a:hover {

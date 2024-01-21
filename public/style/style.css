@@ -52,10 +52,33 @@ button:hover {
     opacity: 0.7;
 }
 
+button:disabled {
+    background: var(--black-offset);
+    opacity: 0.7;
+}
+
 .center {
     text-align: center;
 }
 
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* SVG */
 .svg-expand {
     content: url("../svg/expand-icon.svg");
 }

@@ -9,11 +9,11 @@
             </div>
             <div class="modal-body">
                 <p>Make sure you have read the instructions!</p>
-                <input type="checkbox" id="tnc" name="tnc">
-                <label for="tnc">I agree to the <a>terms and conditions</a> stated.</label>
+                <input type="checkbox" id="tnc-checkbox" name="tnc-checkbox" onchange="updateButtonState()">
+                <label for="tnc-checkbox">I agree to the <a id="tnc-link">terms and conditions</a> stated.</label>
             </div>
             <div class="modal-footer">
-                <button class="start-btn" id="start-btn" onclick="startTest()">let's start!</button>
+                <button class="start-btn" id="start-btn" onclick="startTest()" disabled>let's start!</button>
             </div>
         </div>
     </div>

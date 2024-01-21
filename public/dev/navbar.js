@@ -18,6 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('nav-instructions').addEventListener('click', () => {
     toggleVisibility('instructions');
   });
+
+  document.getElementById('trynow-btn').addEventListener('click', () => {
+    toggleVisibility('instructions');
+  });
+
+  document.getElementById('tnc-link').addEventListener('click', () => {
+    toggleVisibility('instructions');
+  });
 });
 
 // Store loaded scripts in an object to track their status
