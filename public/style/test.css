@@ -74,15 +74,6 @@ body {
     width: 20%;
 }
 
-.modal-header p{
-    font-weight: 700;
-    font-size: 36px;
-    letter-spacing: 5px;
-    margin-left: 15px;
-    text-align: left;
-    align-self: center;
-}
-
 .modal-body p{
     font-weight: 700;
     font-size: 20px;

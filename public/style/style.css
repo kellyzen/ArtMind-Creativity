@@ -61,6 +61,15 @@ button:disabled {
     text-align: center;
 }
 
+.title {
+    font-weight: 700;
+    font-size: 36px;
+    letter-spacing: 5px;
+    margin-left: 15px;
+    text-align: left;
+    align-self: center;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;

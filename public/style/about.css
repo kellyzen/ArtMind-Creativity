@@ -1,0 +1,24 @@
+#about-container {
+    padding: 50px;
+}
+
+#about-container .title {
+    margin-left: 0;
+}
+
+.about {
+    display: grid;
+    grid-template-columns: 55% 40%;
+    grid-column-gap: 5%;
+}
+
+.about p {
+    font-size: 24px;
+    color: var(--black-offset);
+    text-align: justify;
+}
+
+.about img {
+    width: 100%;
+    margin-top: 20px;
+}
