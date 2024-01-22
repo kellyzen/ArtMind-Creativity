@@ -55,38 +55,84 @@ function getCursorPosition(event) {
 }
 
 // Draw 6x3 grid of black circles
+function generateCircle(cx, cy, radius, numPoints) {
+    const circlePoints = [];
+
+    for (let i = 0; i < numPoints; i++) {
+        const theta = (i / numPoints) * (2 * Math.PI);
+        const x = cx + radius * Math.cos(theta);
+        const y = cy + radius * Math.sin(theta);
+
+        circlePoints.push({ x, y });
+    }
+
+    return circlePoints;
+}
+
 let circlesAdded = 0;
 const circleRadius = 60;
-const circleMargin = 40;
-function drawCircles() {
+const circleMargin = 50;
+const rectWidth = (6 * circleMargin + circleRadius * 2 * 6) + 2 * circleMargin;
+const rectHeight = (3 * circleMargin + circleRadius * 2 * 3) + 2 * circleMargin;
+function drawCirclesAndRectangle() {
+    // Draw rectangle
+    const rectX = 575 - rectWidth / 2 + offsetX;
+    const rectY = 325 - rectHeight / 2 + offsetY;
+    drawings.push({
+        x0: rectX,
+        y0: rectY,
+        x1: rectX + rectWidth,
+        y1: rectY,
+        color: '#000'
+    });
+    drawings.push({
+        x0: rectX + rectWidth,
+        y0: rectY,
+        x1: rectX + rectWidth,
+        y1: rectY + rectHeight,
+        color: '#000'
+    });
+    drawings.push({
+        x0: rectX + rectWidth,
+        y0: rectY + rectHeight,
+        x1: rectX,
+        y1: rectY + rectHeight,
+        color: '#000'
+    });
+    drawings.push({
+        x0: rectX,
+        y0: rectY + rectHeight,
+        x1: rectX,
+        y1: rectY,
+        color: '#000'
+    });
+
+    // Draw circles
     for (let i = 0; i < 6; i++) {
         for (let j = 0; j < 3; j++) {
-            const x = i * circleMargin + circleRadius * 2 * i + circleMargin;
-            const y = j * circleMargin + circleRadius * 2 * j + circleMargin;
+            const cx = 100 + i * circleMargin * scale + circleRadius * 2 * i * scale + circleMargin + offsetX;
+            const cy = 100 + j * circleMargin * scale + circleRadius * 2 * j * scale + circleMargin + offsetY;
 
-            const scaledX = toScreenX(x);
-            const scaledY = toScreenY(y);
-            const scaledRadius = circleRadius * scale;
+            const circlePoints = generateCircle(cx, cy, circleRadius * scale, 18);
 
-            context.beginPath();
-            context.arc(scaledX, scaledY, scaledRadius, 0, 2 * Math.PI);
-            context.strokeStyle = '#000';
-            context.lineWidth = 5;
-            context.stroke();
+            // Draw the circle
+            for (let k = 0; k < circlePoints.length; k++) {
+                const point = circlePoints[k];
+                const nextPoint = circlePoints[(k + 1) % circlePoints.length];
 
-            // if (circlesAdded < 18) {
-            //     drawings.push({
-            //         x0: scaledX - scaledRadius,
-            //         y0: scaledY - scaledRadius,
-            //         x1: scaledX + scaledRadius,
-            //         y1: scaledY + scaledRadius,
-            //         color: '#000'
-            //     });
-            //     circlesAdded++;
-            // }
+                drawLine(toScreenX(point.x), toScreenY(point.y), toScreenX(nextPoint.x), toScreenY(nextPoint.y), "#000");
+                drawings.push({
+                    x0: point.x,
+                    y0: point.y,
+                    x1: nextPoint.x,
+                    y1: nextPoint.y,
+                    color: '#000'
+                });
+            }
         }
     }
 }
+drawCirclesAndRectangle();
 
 function redrawCanvas() {
     // set the canvas to the size of the window
@@ -95,7 +141,6 @@ function redrawCanvas() {
 
     context.fillStyle = '#fff';
     context.fillRect(0, 0, canvas.width, canvas.height);
-    drawCircles();
 
     for (let i = 0; i < drawings.length; i++) {
         const line = drawings[i];

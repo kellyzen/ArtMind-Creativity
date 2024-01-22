@@ -60,8 +60,8 @@ function submit() {
 
 function downloadImage() {
     const offscreenCanvas = document.createElement('canvas');
-    offscreenCanvas.width = canvas.width;
-    offscreenCanvas.height = canvas.height;
+    offscreenCanvas.width = 1150;
+    offscreenCanvas.height = 650;
 
     const offscreenContext = offscreenCanvas.getContext('2d');
     offscreenContext.fillStyle = '#fff';
