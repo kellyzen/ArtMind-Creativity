@@ -156,7 +156,7 @@ function drawLine(x0, y0, x1, y1, color) {
     context.moveTo(x0, y0);
     context.lineTo(x1, y1);
     context.strokeStyle = color;
-    context.lineWidth = 5;
+    context.lineWidth = 4;
     context.stroke();
 }
 

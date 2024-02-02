@@ -16,27 +16,36 @@ function updateButtonState() {
 
 // Countdown Timer
 function startTimer() {
-    var presentTime = document.getElementById('timer').innerHTML;
+    var timerElement = document.getElementById('timer');
+
+    // Check if the timer element with the specified ID exists
+    if (!timerElement) {
+        return;
+    }
+
+    var presentTime = timerElement.innerHTML;
     var timeArray = presentTime.split(/[:]+/);
     var m = timeArray[0];
     var s = checkSecond((timeArray[1] - 1));
+
     if (s == 59) { m = m - 1 }
+
     if (m < 0) {
         // document.getElementById('modal-end').classList.add('open');
-        return
+        return;
     }
 
-    document.getElementById('timer').innerHTML =
-        m + ":" + s;
+    timerElement.innerHTML = m + ":" + s;
     setTimeout(startTimer, 1000);
-
 }
 
+// Helper function to add leading zero to seconds
 function checkSecond(sec) {
-    if (sec < 10 && sec >= 0) { sec = "0" + sec };
+    if (sec < 10 && sec >= 0) { sec = "0" + sec }; // add zero in front of numbers < 10
     if (sec < 0) { sec = "59" };
     return sec;
 }
+
 
 // Test
 function giveUp() {
@@ -54,7 +63,16 @@ function submit() {
 
     if (confirmQuit) {
         // document.getElementById('modal-end').classList.add('open');
-        downloadImage();
+        // downloadImage();
+
+        // Fetch the content from result.html
+        fetch('dev/test/result.html')
+            .then(response => response.text())
+            .then(data => {
+                // Replace the content in the test-container with the content from result.html
+                document.querySelector('#test-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error fetching result.html:', error));
     }
 }
 
