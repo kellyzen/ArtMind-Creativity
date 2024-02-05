@@ -1,0 +1,66 @@
+#instructions-container {
+    padding: 50px;
+}
+
+#instructions-container .title {
+    margin-left: 0;
+}
+
+.instructions {
+    display: block;
+}
+
+.instructions p, .instructions li {
+    font-size: 24px;
+    color: var(--black-offset);
+    text-align: justify;
+}
+
+.instructions img {
+    height: 25vh;
+    margin-right: 15px;
+}
+
+/* Canvas */
+canvas {
+    width: 100%;
+    height: 50vh;
+    border: 3px solid var(--black);
+    border-radius: 8px;
+}
+
+.ins-color-palette {
+    display: inline-flex;
+    margin-bottom: 10px;
+    border: 3px solid var(--black);
+    border-radius: 5px;
+}
+
+.ins-color {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.ins-fullscreen-btn {
+    padding: 5px;
+    width: 30px;
+    background-color: var(--gray);
+    border: 3px solid var(--black);
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline;
+    float: right;
+    margin-bottom: 10px;
+}
+
+.ins-color:hover, .ins-fullscreen-btn:hover {
+    opacity: 0.7;
+}
+
+.proceed-btn {
+    padding: 15px 60px;
+    background: var(--pink);
+    float: right;
+    margin-bottom: 30px;
+}

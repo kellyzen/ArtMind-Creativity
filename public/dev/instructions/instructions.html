@@ -1,14 +1,79 @@
+<link rel="stylesheet" href="../style/instructions.css">
+
 <div id="instructions-container">
-    <p>Instructions Page</p>
-    <div class="color-palette" id="color-palette-ins">
-        <div class="color-ins" onclick="changeColor('#000000')" style="background-color: #000000;"></div>
-        <div class="color-ins" onclick="changeColor('#FF0000')" style="background-color: #FF0000;"></div>
-        <div class="color-ins" onclick="changeColor('#00FF00')" style="background-color: #00FF00;"></div>
-        <div class="color-ins" onclick="changeColor('#0000FF')" style="background-color: #0000FF;"></div>
-        <div class="color-ins" onclick="changeColor('#FFFF00')" style="background-color: #FFFF00;"></div>
-        <div class="color-ins" onclick="changeColor('#FF00FF')" style="background-color: #FF00FF;"></div>
-        <div class="color-ins" onclick="changeColor('#00FFFF')" style="background-color: #00FFFF;"></div>
-        <div class="color-ins" onclick="changeColor('#808080')" style="background-color: #808080;"></div>
+    <p class="title">What is Torrance Test of Creativity Thinking- Figural (TTCT-F)?</p>
+    <div class="instructions">
+        <div>
+            <p> TTCT-F is a widely used assessment tool that measures an individual's creative thinking abilities
+                through tasks involving drawing and visual expression. It evaluates various aspects of creativity,
+                including fluency, originality, elaboration, and abstractness of titles.</p>
+
+            <p> In ArtMind's assessment methodology, one activity that we aim to incorporate from the TTCT-F is the
+                Repeated Figures activity. This task involves participants working with series of figures that are
+                repeated or slightly varied. By engaging in this exercise, participants are encouraged to explore
+                different creative possibilities within a structured framework. The Repeated Figures activity offers
+                valuable insights into participants' creative thinking processes, including their ability to iterate on
+                existing ideas, adapt to variations, and generate novel interpretations.</p>
+
+            <p> <u>Example:</u> </p>
+            <img src="images/example1.png" alt="Example art 1">
+            <img src="images/example2.png" alt="Example art 2">
+            <img src="images/example3.png" alt="Example art 3">
+        </div>
     </div>
-    <canvas id="canvas-ins">Your browser does not support drawing canvas</canvas>
+
+    <p class="title">How to use ArtMind?</p>
+    <div class="instructions">
+        <div>
+            <ol>
+                <li>Review and check the terms and conditions. </li>
+                <li>Navigate to the Test tab. </li>
+                <li>Upon clicking the "let's start" button, a 5-minute timer will start. </li>
+                <li>Complete all 18 figures within the provided bounding box. </li>
+                <li>Feel free to choose colours and expand the canvas as needed. </li>
+                <li>You have the option to quit or submit the test in the mean time. </li>
+                <li>Once the 5-minute countdown, the test will end. The evaluation will take 3-10 seconds and
+                    automatically redirects you to the result page. </li>
+            </ol>
+
+            <p><u>Controls:</u></p>
+            <ul>
+                <li><b>Drawing: </b>Left-click or single-finger touch</li>
+                <li><b>Moving: </b>Right-click or two-finger touch</li>
+                <li><b>Zoom in/out: </b>Scroll wheel or pinch </li>
+            </ul>
+
+            <p><b>Try to draw on the canvas here-></b></p>
+            <div class="ins-color-palette" id="ins-color-palette">
+                <div class="ins-color" onclick="changeColorIns('#000000')" style="background-color: #000000;"></div>
+                <div class="ins-color" onclick="changeColorIns('#FF0000')" style="background-color: #FF0000;"></div>
+                <div class="ins-color" onclick="changeColorIns('#00FF00')" style="background-color: #00FF00;"></div>
+                <div class="ins-color" onclick="changeColorIns('#0000FF')" style="background-color: #0000FF;"></div>
+                <div class="ins-color" onclick="changeColorIns('#FFFF00')" style="background-color: #FFFF00;"></div>
+                <div class="ins-color" onclick="changeColorIns('#FF00FF')" style="background-color: #FF00FF;"></div>
+                <div class="ins-color" onclick="changeColorIns('#FFA500')" style="background-color: #FFA500;"></div>
+                <div class="ins-color" onclick="changeColorIns('#808080')" style="background-color: #808080;"></div>
+            </div>
+            <div class="ins-fullscreen-btn svg-expand" id="ins-fullscreen-btn" onclick="toggleFullScreenIns()"></div>
+            <canvas id="ins-canvas">Your browser does not support drawing canvas</canvas>
+        </div>
+    </div>
+
+    <p class="title">Terms & Conditions</p>
+    <div class="instructions">
+        <div>
+            <p> Lorem ipsum dolor sit amet consectetur. Sed vel libero turpis non in nunc. Sollicitudin faucibus
+                curabitur at vitae. Vel condimentum luctus potenti mauris. Tristique feugiat laoreet aliquet a enim.
+                Rhoncus erat volutpat sit posuere orci lectus fusce quam. Arcu vel arcu sed mattis. Integer lacus dolor
+                posuere vitae ac nunc. </p>
+
+            <p> Hendrerit tempor sit tristique orci a facilisis massa metus. Enim orci neque dolor eget interdum elit
+                volutpat. Adipiscing nunc sed mollis purus a luctus. Nisi faucibus imperdiet enim in vulputate tellus
+                nisi sed turpis. Arcu iaculis malesuada turpis pretium facilisis commodo ut. Dictum varius dignissim
+                odio risus. Est adipiscing augue sit at. Mi pellentesque vitae viverra eu aliquet sit aliquam velit
+                rutrum.</p>
+        </div>
+    </div>
+
+    <button id="proceed-btn" class="proceed-btn">proceed to test -></button>
 </div>

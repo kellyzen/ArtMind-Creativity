@@ -11,6 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleVisibility('test');
   });
 
+  document.getElementById('proceed-btn').addEventListener('click', () => {
+    toggleVisibility('test');
+  });
+
   document.getElementById('nav-about').addEventListener('click', () => {
     toggleVisibility('about');
   });
