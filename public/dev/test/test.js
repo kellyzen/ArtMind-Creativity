@@ -31,7 +31,7 @@ function startTimer() {
     if (s == 59) { m = m - 1 }
 
     if (m < 0) {
-        // document.getElementById('modal-end').classList.add('open');
+        // loadEndModal(); // Countdown time ended
         return;
     }
 
@@ -59,24 +59,50 @@ function giveUp() {
 }
 
 function submit() {
-    var confirmQuit = window.confirm('Are you sure you want to submit the test?');
+    var confirmSubmit = window.confirm('Are you sure you want to submit the test?');
 
-    if (confirmQuit) {
-        // document.getElementById('modal-end').classList.add('open');
-        // downloadImage();
-
-        // Fetch the content from result.html
-        fetch('dev/test/result.html')
-            .then(response => response.text())
-            .then(data => {
-                // Replace the content in the test-container with the content from result.html
-                document.querySelector('#test-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error fetching result.html:', error));
+    if (confirmSubmit) {
+     loadEndModal();
     }
 }
 
-function downloadImage() {
+function loadEndModal() {
+    document.getElementById('modal-end').classList.add('open');
+    downloadImage();
+}
+
+function fetchResultContent(drawnImageURL) {
+    // Fetch the content from result.html
+    fetch('dev/test/result.html')
+        .then(response => response.text())
+        .then(data => {
+            // Replace the content in the test-container with the content from result.html
+            document.querySelector('#test-container').innerHTML = data;
+
+            // Set the source of the result image
+            document.querySelector('#result-img').src = drawnImageURL;
+
+            // Attach event listener to the download button
+            document.querySelector('#download-btn').addEventListener('click', function () {
+                const link = document.createElement('a');
+                link.download = `drawn_image_${Date.now()}.jpg`;
+                link.href = drawnImageURL;
+                link.click();
+            });
+        })
+        .catch(error => console.error('Error fetching result.html:', error))
+}
+
+function drawLineToContext(context, x0, y0, x1, y1, color) {
+    context.beginPath();
+    context.moveTo(x0, y0);
+    context.lineTo(x1, y1);
+    context.strokeStyle = color;
+    context.lineWidth = 5;
+    context.stroke();
+}
+
+async function downloadImage() {
     const offscreenCanvas = document.createElement('canvas');
     offscreenCanvas.width = 1150;
     offscreenCanvas.height = 650;
@@ -91,17 +117,37 @@ function downloadImage() {
         drawLineToContext(offscreenContext, line.x0, line.y0, line.x1, line.y1, line.color);
     }
 
-    const link = document.createElement("a");
-    link.download = `${Date.now()}.jpg`;
-    link.href = offscreenCanvas.toDataURL();
-    link.click();
+    try {
+        // Perform object detection on the drawn image
+        // await detectObjects(offscreenCanvas);
+
+        // Convert canvas data to URL
+        const imageURL = offscreenCanvas.toDataURL();
+
+        // Once the predictions are received, fetch the result content
+        fetchResultContent(imageURL);
+    } catch (error) {
+        console.error("Error in object detection:", error);
+    }
 }
 
-function drawLineToContext(context, x0, y0, x1, y1, color) {
-    context.beginPath();
-    context.moveTo(x0, y0);
-    context.lineTo(x1, y1);
-    context.strokeStyle = color;
-    context.lineWidth = 5;
-    context.stroke();
+// Connect Roboflow model
+async function detectObjects(canvas) {
+    try {
+        // Load the model
+        var model = await roboflow.auth({
+            publishable_key: "rf_0wAMiUr3JaWSL9bxUTSvSb899nT2"
+        }).load({
+            model: "artmind-repeated-figure-test",
+            version: 1
+        });
+
+        // Detect objects in the canvas
+        var predictions = await model.detect(canvas);
+        console.log("Predictions:", predictions);
+
+        // Handle predictions as needed
+    } catch (error) {
+        console.error("Error detecting objects:", error);
+    }
 }
