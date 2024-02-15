@@ -1,4 +1,4 @@
-// Modal popup
+// Start modal popup
 document.getElementById('modal-start').classList.add('open');
 
 function startTest() {
@@ -47,7 +47,7 @@ function checkSecond(sec) {
 }
 
 
-// Test
+// Buttons behaviour onclick during test
 function giveUp() {
     var confirmQuit = window.confirm('Do you really want to quit the test?');
 
@@ -66,33 +66,13 @@ function submit() {
     }
 }
 
+// Load end modal after test ended
 function loadEndModal() {
     document.getElementById('modal-end').classList.add('open');
     downloadImage();
 }
 
-function fetchResultContent(drawnImageURL) {
-    // Fetch the content from result.html
-    fetch('dev/test/result.html')
-        .then(response => response.text())
-        .then(data => {
-            // Replace the content in the test-container with the content from result.html
-            document.querySelector('#test-container').innerHTML = data;
-
-            // Set the source of the result image
-            document.querySelector('#result-img').src = drawnImageURL;
-
-            // Attach event listener to the download button
-            document.querySelector('#download-btn').addEventListener('click', function () {
-                const link = document.createElement('a');
-                link.download = `drawn_image_${Date.now()}.jpg`;
-                link.href = drawnImageURL;
-                link.click();
-            });
-        })
-        .catch(error => console.error('Error fetching result.html:', error))
-}
-
+// Draw lines
 function drawLineToContext(context, x0, y0, x1, y1, color) {
     context.beginPath();
     context.moveTo(x0, y0);
@@ -102,7 +82,9 @@ function drawLineToContext(context, x0, y0, x1, y1, color) {
     context.stroke();
 }
 
+// Sends the drawing to Roboflow for predictions and create URL for the drawing
 async function downloadImage() {
+    // Redraw on a new offscreenCanvas
     const offscreenCanvas = document.createElement('canvas');
     offscreenCanvas.width = 1150;
     offscreenCanvas.height = 650;
@@ -131,7 +113,7 @@ async function downloadImage() {
     }
 }
 
-// Connect Roboflow model
+// Connect to Roboflow model
 async function detectObjects(canvas) {
     try {
         // Load the model
@@ -150,4 +132,27 @@ async function detectObjects(canvas) {
     } catch (error) {
         console.error("Error detecting objects:", error);
     }
+}
+
+// Load result page
+function fetchResultContent(drawnImageURL) {
+    // Fetch the content from result.html
+    fetch('dev/test/result.html')
+        .then(response => response.text())
+        .then(data => {
+            // Replace the content in the test-container with the content from result.html
+            document.querySelector('#test-container').innerHTML = data;
+
+            // Set the source of the result image
+            document.querySelector('#result-img').src = drawnImageURL;
+
+            // Attach event listener to the download button
+            document.querySelector('#download-btn').addEventListener('click', function () {
+                const link = document.createElement('a');
+                link.download = `drawn_image_${Date.now()}.jpg`;
+                link.href = drawnImageURL;
+                link.click();
+            });
+        })
+        .catch(error => console.error('Error fetching result.html:', error))
 }

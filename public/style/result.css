@@ -89,9 +89,30 @@
     transform: rotate(270deg);
 }
 
-.tab-content p {
+/* Tab Content */
+.tab-content div {
     margin: 0;
-    padding: 20px;
+    padding: 10px 30px;
+}
+
+.tab-content.score-analysis {
+    display: grid;
+    grid-template-columns: 60% 35%;
+    grid-column-gap: 5%;
+}
+
+.tab-content.score-analysis div:first-child {
+    border-right: 3px solid var(--black);
+}
+
+.tab-content.score-analysis p {
+    font-weight: bold;
+    color: var(--black-offset);
+}
+
+.tab-content.score-analysis div:first-child p:first-child {
+    font-size: 20px;
+    color: var(--black);
 }
 
 @keyframes bounce {
