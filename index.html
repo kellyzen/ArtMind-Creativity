@@ -11,15 +11,35 @@
 </head>
 
 <body>
-    <div id="navbar-container">
-        <!-- {{navbar}} -->
+    <div class="available">
+        <div id="navbar-container">
+            <!-- {{navbar}} -->
+        </div>
+
+        <div id="main-container">
+            <div id="home-container">
+                <!-- {{home}} -->
+            </div>
+            <div id="about-container">
+                <!-- {{about}} -->
+            </div>
+            <div id="instructions-container">
+                <!-- {{instructions}} -->
+            </div>
+            <div id="test-container">
+                <!-- {{test}} -->
+            </div>
+
+        </div>
     </div>
 
-    <div id="main-container">
-        <!-- {{home}} -->
-        <!-- {{about}} -->
-        <!-- {{instructions}} -->
-        <!-- {{test}} -->
+    <div class="unavailable">
+        <div class="center">
+            <span class="svg-sad-face svg"></span>
+            <p> For optimal experience, please note that the ArtMind website does not currently support mobile viewing.
+                Alternatively, for the best browsing experience, using a tablet or laptop device is recommended. If you
+                are using a tablet, consider rotating it to horizontal view for improved usability. </p>
+        </div>
     </div>
 
     <script src="dev/navbar.js"></script>

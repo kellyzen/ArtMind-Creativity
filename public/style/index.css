@@ -1,2 +1,22 @@
 @import "style.css";
 @import "navbar.css";
+
+.available {
+    display: block;
+}
+
+.unavailable {
+    display: none;
+    padding: 8vh;
+}
+
+/* Screen sizes less than 720px */
+@media (max-width: 720px) {
+    .available {
+        display: none;
+    }
+
+    .unavailable {
+        display: block;
+    }
+}

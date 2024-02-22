@@ -119,3 +119,7 @@ progress::-webkit-progress-value {
 .svg-timer {
     content: url("../svg/timer-icon.svg");
 }
+
+.svg-sad-face {
+    content: url("../svg/sad-face.svg");
+}
