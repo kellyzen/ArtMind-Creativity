@@ -62,7 +62,7 @@ function submit() {
     var confirmSubmit = window.confirm('Are you sure you want to submit the test?');
 
     if (confirmSubmit) {
-     loadEndModal();
+        loadEndModal();
     }
 }
 
@@ -101,13 +101,14 @@ async function downloadImage() {
 
     try {
         // Perform object detection on the drawn image
-        // await detectObjects(offscreenCanvas);
+        const predictionResult = await detectObjects(offscreenCanvas);
+        // const predictionResult = null;///////////////////
 
         // Convert canvas data to URL
         const imageURL = offscreenCanvas.toDataURL();
 
         // Once the predictions are received, fetch the result content
-        fetchResultContent(imageURL);
+        fetchResultContent(imageURL, predictionResult);
     } catch (error) {
         console.error("Error in object detection:", error);
     }
@@ -118,41 +119,162 @@ async function detectObjects(canvas) {
     try {
         // Load the model
         var model = await roboflow.auth({
-            publishable_key: "rf_0wAMiUr3JaWSL9bxUTSvSb899nT2"
+            publishable_key: "rf_UwJWYh9v5YWZoyJfnYP96FteO043"
         }).load({
-            model: "artmind-repeated-figure-test",
+            model: "artmind-detection",
             version: 1
+        });
+
+        model.configure({
+            threshold: 0,
+            overlap: 0.5,
+            max_objects: 50
         });
 
         // Detect objects in the canvas
         var predictions = await model.detect(canvas);
-        console.log("Predictions:", predictions);
+
+        var classesAndConfidences = [];
+        predictions.forEach(prediction => {
+            var classAndConfidence = {
+                class: prediction.class,
+                confidence: prediction.confidence
+            };
+            classesAndConfidences.push(classAndConfidence);
+        });
+
+        classesAndConfidences = classesAndConfidences.filter(prediction => prediction.class != "moon");
+
+        console.log("Predictions:", classesAndConfidences);
+        return classesAndConfidences;
 
         // Handle predictions as needed
     } catch (error) {
         console.error("Error detecting objects:", error);
+        return [];
     }
 }
 
 // Load result page
-function fetchResultContent(drawnImageURL) {
-    // Fetch the content from result.html
-    fetch('dev/test/result.html')
-        .then(response => response.text())
-        .then(data => {
-            // Replace the content in the test-container with the content from result.html
-            document.querySelector('#test-container').innerHTML = data;
+async function fetchResultContent(drawnImageURL, predictionResult) {
+    try {
+        // Calculate the result score
+        const finalEval = await calculateScore(predictionResult);
+        const fluencyList = finalEval.fluency;
+        const fluencyScore = finalEval.fluencyScore;
+        const elaborationList = finalEval.elaboration;
+        const elaborationScore = finalEval.elaborationScore;
 
-            // Set the source of the result image
-            document.querySelector('#result-img').src = drawnImageURL;
+        // Fetch the content from result.html
+        fetch('dev/test/result.html')
+            .then(response => response.text())
+            .then(data => {
+                // Replace the content in the test-container with the content from result.html
+                document.querySelector('#test-container').innerHTML = data;
 
-            // Attach event listener to the download button
-            document.querySelector('#download-btn').addEventListener('click', function () {
-                const link = document.createElement('a');
-                link.download = `drawn_image_${Date.now()}.jpg`;
-                link.href = drawnImageURL;
-                link.click();
-            });
-        })
-        .catch(error => console.error('Error fetching result.html:', error))
+                // Set the source of the result image
+                document.querySelector('#result-img').src = drawnImageURL;
+
+                // Attach event listener to the download button
+                document.querySelector('#download-btn').addEventListener('click', function () {
+                    const link = document.createElement('a');
+                    link.download = `drawn_image_${Date.now()}.jpg`;
+                    link.href = drawnImageURL;
+                    link.click();
+                });
+
+                // Set fluency score
+                document.querySelector('#fluency-score').innerHTML = fluencyScore + " stimulus identified (" + fluencyScore + " points!)";
+                document.querySelector('#fluency-desc').innerHTML = "The identified stimulus in your drawing are: <u>" + fluencyList + "</u>";
+
+                // Set elaboration score
+                document.querySelector('#elaboration-score').innerHTML = elaborationScore + " points!";
+                document.querySelector('#elaboration-desc').innerHTML = "The identified additional elements in your drawing are: <u>" + elaborationList +"</u>";
+            })
+            .catch(error => console.error('Error fetching result.html:', error))
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+// Calculate total, fluency, originality & elaboration score
+async function calculateScore(predictionResult) {
+    let fluencyList = [];
+    let fluencyScore = 0;
+    let originalityList = [];
+    let originalityScore = 0;
+    let elaborationList = [];
+    let elaborationScore = 0;
+
+    try {
+        // Fetch scoreData from JSON
+        const response = await fetch('http://localhost:3000/assets/score.json');
+        const json = await response.json();
+
+        // calculate fluency score
+        fluencyList = calculateFluency(predictionResult, json);
+        fluencyScore = fluencyList.length;
+
+        // calculate elaboration score
+        elaborationList = calculateElaboration(predictionResult, json);
+        if (elaborationList.length < 6) {
+            elaborationScore = 1;
+        } else {
+            elaborationScore = 2;
+        }
+
+        return { 
+            fluency: fluencyList, 
+            fluencyScore: fluencyScore,
+            originality: originalityList,
+            originalityScore: originalityScore, 
+            elaboration: elaborationList,
+            elaborationScore: elaborationScore
+        };
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+}
+
+
+function calculateFluency(predictionResult, resultJson) {
+    let maxScore = 18;
+    const fluencyScores = [];
+
+    // Sort the predictionResult array in descending order based on confidence
+    predictionResult.sort((a, b) => b.confidence - a.confidence);
+
+    // Identify top classes with "elaboration": "basic"
+    const basicElaborationClasses = resultJson
+        .filter(score => score.elaboration === 'basic')
+        .map(score => ({ class: score.class, display: score.display }));
+
+    for (const prediction of predictionResult) {
+        if (fluencyScores.length >= maxScore) break;
+        for (const score of basicElaborationClasses) {
+            if (score.class === prediction.class && !fluencyScores.includes(score.display)) {
+                fluencyScores.push(score.display);
+                break;
+            }
+        }
+    }
+
+    return fluencyScores;
+}
+
+function calculateElaboration(predictionResult, resultJson) {
+    const elaborationScores = [];
+
+    // Identify top classes with "elaboration": "additional"
+    const basicElaborationClasses = resultJson.filter(score => score.elaboration === 'additional').map(score => score.class);
+
+    for (const prediction of predictionResult) {
+        if (basicElaborationClasses.includes(prediction.class) && !elaborationScores.some(score => score.class === prediction.class)) {
+            elaborationScores.push([prediction.class]);
+
+        }
+    }
+
+    return elaborationScores;
 }

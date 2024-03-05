@@ -6,14 +6,15 @@
             <img id="result-img" alt="Result image">
         </div>
         <div>
-            <p class="title">Score: 80%</p>
-            <p class="title">(Above average)</p>
-            <progress value="80" max="100"></progress>
+            <p id="final-score" class="title">Score: 80%</p>
+            <p id="final-category" class="title">(Above average)</p>
+            <progress id="final-progress" value="80" max="100"></progress>
             <button id="download-btn" class="download-btn">download image</button>
         </div>
     </div>
 
-    <p style="color: var(--red)"><b>*** NOTE: This website does not offer creative diagnosis; rather, it solely educates
+    <p style="color: var(--red)"><b>*** NOTE: EDUCATIONAL PURPOSE ONLY!</b></p>
+    <p style="color: var(--red)"><b>*** This website does not offer creative diagnosis; rather, it solely educates
             individuals on creative aspects in drawing.</b></p>
 
     <div>
@@ -23,8 +24,9 @@
                 <label for="accordion1" class="tab-label">Score Analysis</label>
                 <div class="tab-content">
                     <div>
-                        <p>Above Average (61-84%)</p>
-                        <p>Your creativity is above average, indicating a strong ability to think creatively. Keep
+                        <p id="score-category">Above Average (61-84%)</p>
+                        <p id="score-desc">Your creativity is above average, indicating a strong ability to think
+                            creatively. Keep
                             nurturing this skill by engaging in diverse creative activities.</p>
                     </div>
                     <div>
@@ -42,8 +44,8 @@
                 <label for="accordion2" class="tab-label">Fluency</label>
                 <div class="tab-content">
                     <div>
-                        <p>9 out of 18 stimulus identified</p>
-                        <p>The identified stimulus are: fish, flower, cents, clock, ball, planet, human, sun, bird.</p>
+                        <p id="fluency-score">Not applicable</p>
+                        <p id="fluency-desc">Not applicable</p>
                         <p>Each recognized stimulus earns 1 point, with a maximum score of 18. The recognized stimulus
                             will undergo further evaluation (originality & elaboration).</p>
                         <p>Unidentifiable responses are excluded from the evaluation of originality and elaboration.
@@ -62,8 +64,9 @@
                 <label for="accordion3" class="tab-label">Originality</label>
                 <div class="tab-content">
                     <div>
-                        <p>9 out of 18 stimulus identified</p>
-                        <p>The identified stimulus are: fish, flower, cents, clock, ball, planet, human, sun, bird.</p>
+                        <p id="originality-score">9 out of 18 stimulus identified</p>
+                        <p id="originality-desc">The identified stimulus are: fish, flower, cents, clock, ball, planet,
+                            human, sun, bird.</p>
                         <p>Each recognized stimulus earns 1 point, with a maximum score of 18. The recognized stimulus
                             will undergo further evaluation (originality & elaboration).</p>
                         <p>Unidentifiable responses are excluded from the evaluation of originality and elaboration.
@@ -83,8 +86,9 @@
                 <label for="accordion4" class="tab-label">Elaboration</label>
                 <div class="tab-content">
                     <div>
-                        <p>1 point</p>
-                        <p>The identified additional elements are: bee, butterfly, grass, water, bubble.</p>
+                        <p id="elaboration-score">1 point</p>
+                        <p id="elaboration-desc">The identified additional elements are: bee, butterfly, grass, water,
+                            bubble.</p>
                         <p>For example:</p>
 
                         <div class="content-grid">
