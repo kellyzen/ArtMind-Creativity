@@ -85,6 +85,12 @@ window.addEventListener("resize", (event) => {
     redrawCanvasIns();
 });
 
+document.addEventListener('touchstart', function(event) {
+    if (!canvasIns.contains(event.target)) {
+        return;
+    }
+});
+
 // Mouse Event Handlers
 canvasIns.addEventListener('mousedown', onMouseDownIns);
 canvasIns.addEventListener('mouseup', onMouseUpIns, false);
@@ -94,7 +100,11 @@ canvasIns.addEventListener('wheel', onMouseWheelIns, false);
 
 
 // Touch Event Handlers 
-canvasIns.addEventListener('touchstart', onTouchStartIns);
+canvasIns.addEventListener('touchstart', function(event) {
+    event.preventDefault();
+    onTouchStartIns(event);
+});
+// canvasIns.addEventListener('touchstart', onTouchStartIns);
 canvasIns.addEventListener('touchend', onTouchEndIns);
 canvasIns.addEventListener('touchcancel', onTouchEndIns);
 canvasIns.addEventListener('touchmove', onTouchMoveIns);
@@ -213,10 +223,10 @@ function onTouchMoveIns(event) {
     const scaleXIns = canvasIns.width / rectIns.width;
     const scaleYIns = canvasIns.height / rectIns.height;
 
-    const touch0XIns = (event.touches[0].pageX - rectIns.left) * scaleXIns;
-    const touch0YIns = (event.touches[0].pageY - rectIns.top) * scaleYIns;
-    const prevTouch0XIns = prevTouchesIns[0] ? (prevTouchesIns[0].pageX - rectIns.left) * scaleXIns : touch0XIns;
-    const prevTouch0YIns = prevTouchesIns[0] ? (prevTouchesIns[0].pageY - rectIns.top) * scaleYIns : touch0YIns;
+    const touch0XIns = (event.touches[0].pageX - rectIns.left - window.scrollX) * scaleXIns;
+    const touch0YIns = (event.touches[0].pageY - rectIns.top - window.scrollY) * scaleYIns;
+    const prevTouch0XIns = prevTouchesIns[0] ? (prevTouchesIns[0].pageX - rectIns.left - window.scrollX) * scaleXIns : touch0XIns;
+    const prevTouch0YIns = prevTouchesIns[0] ? (prevTouchesIns[0].pageY - rectIns.top - window.scrollY) * scaleYIns : touch0YIns;
 
     const scaledXIns = toTrueXIns(touch0XIns);
     const scaledYIns = toTrueYIns(touch0YIns);

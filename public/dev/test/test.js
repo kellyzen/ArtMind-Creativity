@@ -102,7 +102,6 @@ async function downloadImage() {
     try {
         // Perform object detection on the drawn image
         const predictionResult = await detectObjects(offscreenCanvas);
-        // const predictionResult = null;///////////////////
 
         // Convert canvas data to URL
         const imageURL = offscreenCanvas.toDataURL();

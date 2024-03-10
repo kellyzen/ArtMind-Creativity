@@ -291,10 +291,10 @@ function onTouchMove(event) {
     const scaleX = canvas.width / rect.width;
     const scaleY = canvas.height / rect.height;
 
-    const touch0X = (event.touches[0].pageX - rect.left) * scaleX;
-    const touch0Y = (event.touches[0].pageY - rect.top) * scaleY;
-    const prevTouch0X = prevTouches[0] ? (prevTouches[0].pageX - rect.left) * scaleX : touch0X;
-    const prevTouch0Y = prevTouches[0] ? (prevTouches[0].pageY - rect.top) * scaleY : touch0Y;
+    const touch0X = (event.touches[0].pageX - rect.left - window.scrollX) * scaleX;
+    const touch0Y = (event.touches[0].pageY - rect.top - window.scrollY) * scaleY;
+    const prevTouch0X = prevTouches[0] ? (prevTouches[0].pageX - rect.left - window.scrollX) * scaleX : touch0X;
+    const prevTouch0Y = prevTouches[0] ? (prevTouches[0].pageY - rect.top - window.scrollY) * scaleY : touch0Y;
 
     const scaledX = toTrueX(touch0X);
     const scaledY = toTrueY(touch0Y);

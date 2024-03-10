@@ -123,3 +123,8 @@ progress::-webkit-progress-value {
 .svg-sad-face {
     content: url("../svg/sad-face.svg");
 }
+
+/* Touch Action */
+.no-zoom {
+    touch-action: none; /* Prevent default touch actions */
+}
