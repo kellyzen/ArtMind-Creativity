@@ -124,6 +124,10 @@ progress::-webkit-progress-value {
     content: url("../svg/sad-face.svg");
 }
 
+.svg-info {
+    content: url("../svg/info-icon.svg");
+}
+
 /* Touch Action */
 .no-zoom {
     touch-action: none; /* Prevent default touch actions */

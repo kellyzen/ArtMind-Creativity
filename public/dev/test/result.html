@@ -6,9 +6,9 @@
             <img id="result-img" alt="Result image">
         </div>
         <div>
-            <p id="final-score" class="title">Score: 80%</p>
-            <p id="final-category" class="title">(Above average)</p>
-            <progress id="final-progress" value="80" max="100"></progress>
+            <p id="final-score" class="title">Not applicable</p>
+            <p id="final-category" class="title">Not applicable</p>
+            <progress id="final-progress" value="0" max="100"></progress>
             <button id="download-btn" class="download-btn">download image</button>
         </div>
     </div>
@@ -24,10 +24,8 @@
                 <label for="accordion1" class="tab-label">Score Analysis</label>
                 <div class="tab-content">
                     <div>
-                        <p id="score-category">Above Average (61-84%)</p>
-                        <p id="score-desc">Your creativity is above average, indicating a strong ability to think
-                            creatively. Keep
-                            nurturing this skill by engaging in diverse creative activities.</p>
+                        <p id="score-category">Not applicable</p>
+                        <p id="score-desc">Not applicable</p>
                     </div>
                     <div>
                         <p>Weak: 0-16%</p>
@@ -64,13 +62,17 @@
                 <label for="accordion3" class="tab-label">Originality</label>
                 <div class="tab-content">
                     <div>
-                        <p id="originality-score">9 out of 18 stimulus identified</p>
-                        <p id="originality-desc">The identified stimulus are: fish, flower, cents, clock, ball, planet,
-                            human, sun, bird.</p>
-                        <p>Each recognized stimulus earns 1 point, with a maximum score of 18. The recognized stimulus
-                            will undergo further evaluation (originality & elaboration).</p>
-                        <p>Unidentifiable responses are excluded from the evaluation of originality and elaboration.
-                        </p>
+                        <p id="originality-score">Not applicable</p>
+                        <p>Among all the identified stimuli, each one is ranked according to the uniqueness of the
+                            response compared other participants.For example, the idea of a flower is common for this
+                            stimulus, and therefore, it receives 0 point. Combining multiple figures could
+                            also gain additional points.</p>
+                        <ul>
+                            <li id="originality-desc-0">none</li>
+                            <li id="originality-desc-1">none</li>
+                            <li id="originality-desc-2">none</li>
+                            <li id="originality-desc-3">none</li>
+                        </ul>
                     </div>
                     <div>
                         <p>Definition:</p>
@@ -86,9 +88,8 @@
                 <label for="accordion4" class="tab-label">Elaboration</label>
                 <div class="tab-content">
                     <div>
-                        <p id="elaboration-score">1 point</p>
-                        <p id="elaboration-desc">The identified additional elements are: bee, butterfly, grass, water,
-                            bubble.</p>
+                        <p id="elaboration-score">Not applicable</p>
+                        <p id="elaboration-desc">Not applicable</p>
                         <p>For example:</p>
 
                         <div class="content-grid">
@@ -104,8 +105,9 @@
 
                         <p>Scores are assigned based on the range of additional ideas per response:</p>
                         <ul>
-                            <li>0 - 5 additional ideas: +1 point </li>
-                            <li>6 - 12additional ideas: +2 point</li>
+                            <li>0 additional ideas: +0 point </li>
+                            <li>1 - 5 additional ideas: +1 point </li>
+                            <li>> 5 additional ideas: +2 point</li>
                         </ul>
                     </div>
                     <div>

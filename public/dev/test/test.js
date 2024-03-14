@@ -121,7 +121,7 @@ async function detectObjects(canvas) {
             publishable_key: "rf_UwJWYh9v5YWZoyJfnYP96FteO043"
         }).load({
             model: "artmind-detection",
-            version: 1
+            version: 2
         });
 
         model.configure({
@@ -161,8 +161,17 @@ async function fetchResultContent(drawnImageURL, predictionResult) {
         const finalEval = await calculateScore(predictionResult);
         const fluencyList = finalEval.fluency;
         const fluencyScore = finalEval.fluencyScore;
+        const originalityList0 = finalEval.originality0;
+        const originalityList1 = finalEval.originality1;
+        const originalityList2 = finalEval.originality2;
+        const originalityList3 = finalEval.originality3;
+        const originalityScore = finalEval.originalityScore;
         const elaborationList = finalEval.elaboration;
         const elaborationScore = finalEval.elaborationScore;
+        const finalScore = finalEval.finalScore;
+        const scoreCategory = finalEval.scoreCategory;
+        const scoreRange = finalEval.scoreRange;
+        const scoreDesc = finalEval.scoreDesc;
 
         // Fetch the content from result.html
         fetch('dev/test/result.html')
@@ -182,13 +191,29 @@ async function fetchResultContent(drawnImageURL, predictionResult) {
                     link.click();
                 });
 
+                // Set final score
+                document.querySelector('#final-score').innerHTML = "Score: " + finalScore + "%";
+                document.querySelector('#final-category').innerHTML = "(" + scoreCategory + ")";
+                document.querySelector('#final-progress').value = Math.min(Math.max(finalScore, 0), 100);
+
+                // Set score analysis
+                document.querySelector('#score-category').innerHTML = scoreCategory + scoreRange;
+                document.querySelector('#score-desc').innerHTML = scoreDesc;
+
                 // Set fluency score
-                document.querySelector('#fluency-score').innerHTML = fluencyScore + " stimulus identified (" + fluencyScore + " points!)";
+                document.querySelector('#fluency-score').innerHTML = fluencyScore + " point(s) (total: 18)";
                 document.querySelector('#fluency-desc').innerHTML = "The identified stimulus in your drawing are: <u>" + fluencyList + "</u>";
 
+                // Set originality score
+                document.querySelector('#originality-score').innerHTML = originalityScore + " point(s) (total: 36)";
+                document.querySelector('#originality-desc-2').innerHTML = "Most unique (+2): " + originalityList2;
+                document.querySelector('#originality-desc-1').innerHTML = "Less common (+1): " + originalityList1;
+                document.querySelector('#originality-desc-0').innerHTML = "Most common (+0): " + originalityList0;
+                document.querySelector('#originality-desc-3').innerHTML = "Additional point (+3): " + originalityList3;
+
                 // Set elaboration score
-                document.querySelector('#elaboration-score').innerHTML = elaborationScore + " points!";
-                document.querySelector('#elaboration-desc').innerHTML = "The identified additional elements in your drawing are: <u>" + elaborationList +"</u>";
+                document.querySelector('#elaboration-score').innerHTML = elaborationScore + " point(s) (total: 36)";
+                document.querySelector('#elaboration-desc').innerHTML = "The identified additional elements in your drawing are: <u>" + elaborationList + "</u>";
             })
             .catch(error => console.error('Error fetching result.html:', error))
     } catch (error) {
@@ -198,37 +223,64 @@ async function fetchResultContent(drawnImageURL, predictionResult) {
 
 // Calculate total, fluency, originality & elaboration score
 async function calculateScore(predictionResult) {
+    const maxFluencyScore = 18;
+    const maxOriginalityScore = 36;
+    const maxElaborationScore = 36;
+
     let fluencyList = [];
     let fluencyScore = 0;
-    let originalityList = [];
+    let originalityList0 = [];
+    let originalityList1 = [];
+    let originalityList2 = [];
+    let originalityList3 = [];
     let originalityScore = 0;
     let elaborationList = [];
     let elaborationScore = 0;
+    let finalScore = 0;
+    let scoreCategory = "";
+    let scoreRange = "";
+    let scoreDesc = "";
 
     try {
         // Fetch scoreData from JSON
         const response = await fetch('http://localhost:3000/assets/score.json');
         const json = await response.json();
 
-        // calculate fluency score
-        fluencyList = calculateFluency(predictionResult, json);
+        const basicElement = await calculateFluency(predictionResult, json);
+        fluencyList = basicElement.fluencyScores;
         fluencyScore = fluencyList.length;
 
-        // calculate elaboration score
-        elaborationList = calculateElaboration(predictionResult, json);
-        if (elaborationList.length < 6) {
-            elaborationScore = 1;
-        } else {
-            elaborationScore = 2;
-        }
+        const originalityLists = await calculateOriginality(fluencyList, basicElement.originalityScores);
+        originalityList0 = originalityLists.originalityList0;
+        originalityList1 = originalityLists.originalityList1;
+        originalityList2 = originalityLists.originalityList2;
+        originalityList3 = originalityLists.originalityList3;
+        originalityScore = originalityLists.originalityScore;
 
-        return { 
-            fluency: fluencyList, 
+        // calculate elaboration score
+        elaborationList = await calculateElaboration(predictionResult, json);
+        elaborationScore = elaborationList.length;
+
+        finalScore = Math.round((fluencyScore + originalityScore + elaborationScore) / (maxFluencyScore + maxOriginalityScore + maxElaborationScore) * 100);
+        const analysis = await scoreAnalysis(finalScore);
+        scoreCategory = analysis.scoreCategory;
+        scoreDesc = analysis.scoreDesc;
+        scoreRange = analysis.scoreRange;
+
+        return {
+            fluency: fluencyList,
             fluencyScore: fluencyScore,
-            originality: originalityList,
-            originalityScore: originalityScore, 
+            originality0: originalityList0,
+            originality1: originalityList1,
+            originality2: originalityList2,
+            originality3: originalityList3,
+            originalityScore: originalityScore,
             elaboration: elaborationList,
-            elaborationScore: elaborationScore
+            elaborationScore: elaborationScore,
+            finalScore: finalScore,
+            scoreCategory: scoreCategory,
+            scoreRange: scoreRange,
+            scoreDesc: scoreDesc
         };
     } catch (error) {
         console.error('Error:', error);
@@ -236,10 +288,10 @@ async function calculateScore(predictionResult) {
     }
 }
 
-
-function calculateFluency(predictionResult, resultJson) {
+async function calculateFluency(predictionResult, resultJson) {
     let maxScore = 18;
     const fluencyScores = [];
+    const originalityScores = [];
 
     // Sort the predictionResult array in descending order based on confidence
     predictionResult.sort((a, b) => b.confidence - a.confidence);
@@ -247,33 +299,121 @@ function calculateFluency(predictionResult, resultJson) {
     // Identify top classes with "elaboration": "basic"
     const basicElaborationClasses = resultJson
         .filter(score => score.elaboration === 'basic')
-        .map(score => ({ class: score.class, display: score.display }));
+        .map(score => ({ class: score.class, display: score.display, originality: score.originality }));
 
     for (const prediction of predictionResult) {
         if (fluencyScores.length >= maxScore) break;
         for (const score of basicElaborationClasses) {
             if (score.class === prediction.class && !fluencyScores.includes(score.display)) {
                 fluencyScores.push(score.display);
+                originalityScores.push(score.originality);
                 break;
             }
         }
     }
 
-    return fluencyScores;
+    const fluencyScoresWithSpace = fluencyScores.map(item => item + ' ');
+
+    return {
+        fluencyScores: fluencyScoresWithSpace,
+        originalityScores: originalityScores
+    };
 }
 
-function calculateElaboration(predictionResult, resultJson) {
-    const elaborationScores = [];
+async function calculateOriginality(fluencyList, originalityScores) {
+    // Initialize originality lists
+    let originalityScore = 0;
+    let originalityList0 = [];
+    let originalityList1 = [];
+    let originalityList2 = [];
+    let originalityList3 = [];
+
+    // Loop through each item in fluencyList
+    for (let i = 0; i < fluencyList.length; i++) {
+        // Check the originality score for the current item
+        let score = originalityScores[i];
+        originalityScore += score;
+
+        // Determine which originality list to add the item to based on its originality score
+        if (score === 0) {
+            originalityList0.push(fluencyList[i]);
+        } else if (score === 1) {
+            originalityList1.push(fluencyList[i]);
+        } else if (score === 2) {
+            originalityList2.push(fluencyList[i]);
+        } else {
+            originalityList3.push(fluencyList[i]);
+        }
+    }
+
+    return {
+        originalityScore: originalityScore,
+        originalityList0: originalityList0,
+        originalityList1: originalityList1,
+        originalityList2: originalityList2,
+        originalityList3: originalityList3
+    };
+}
+
+async function calculateElaboration(predictionResult, resultJson) {
+    const elaborationScores = new Set(); // Use a Set to store unique values
 
     // Identify top classes with "elaboration": "additional"
     const basicElaborationClasses = resultJson.filter(score => score.elaboration === 'additional').map(score => score.class);
 
     for (const prediction of predictionResult) {
-        if (basicElaborationClasses.includes(prediction.class) && !elaborationScores.some(score => score.class === prediction.class)) {
-            elaborationScores.push([prediction.class]);
-
+        if (basicElaborationClasses.includes(prediction.class)) {
+            elaborationScores.add(prediction.class); // Add the class to the Set
         }
     }
 
-    return elaborationScores;
+    // Convert the Set back to an array and append a space to each item
+    const elaborationScoresWithSpace = [...elaborationScores].map(item => item + ' ');
+
+    return elaborationScoresWithSpace;
+}
+
+async function scoreAnalysis(finalScore) {
+    let scoreCategory;
+    let scoreRange;
+    let scoreDesc;
+
+    switch (true) {
+        case (finalScore >= 97):
+            scoreCategory = "Very strong";
+            scoreRange = " (97-100%)";
+            scoreDesc = "Exceptional! You exhibit a very strong sense of creativity, showcasing a remarkable ability to think outside conventional boundaries. Your imaginative skills are outstanding. Keep exploring and pushing your creative limits.";
+            break;
+        case (finalScore >= 85):
+            scoreCategory = "Strong";
+            scoreRange = " (85-96%)";
+            scoreDesc = "Congratulations! Your creativity is strong, reflecting a high level of imaginative thinking. Continue to challenge yourself with new and innovative projects to further develop your creative prowess.";
+            break;
+        case (finalScore >= 61):
+            scoreCategory = "Above average";
+            scoreRange = " (61-84%)";
+            scoreDesc = "Your creativity is above average, indicating a strong ability to think creatively. Keep nurturing this skill by engaging in diverse creative activities.";
+            break;
+        case (finalScore >= 41):
+            scoreCategory = "Average";
+            scoreRange = " (41-60%)";
+            scoreDesc = " You demonstrate a moderate level of creativity. Continue to explore different creative outlets and approaches to further enhance your imaginative thinking.";
+            break;
+        case (finalScore >= 17):
+            scoreCategory = "Below average";
+            scoreRange = " (17-40%)";
+            scoreDesc = "There is room for improvement in your creativity. Explore various creative exercises and try to think outside the box to enhance your imaginative skills.";
+            break;
+        default:
+            scoreCategory = "Weak";
+            scoreRange = " (0-16%)";
+            scoreDesc = "Your creativity may benefit from further exploration and development. Consider experimenting with new ideas and perspectives to enhance your creative abilities.";
+            break;
+    }
+
+    return {
+        scoreCategory: scoreCategory,
+        scoreRange: scoreRange,
+        scoreDesc: scoreDesc
+    };
 }

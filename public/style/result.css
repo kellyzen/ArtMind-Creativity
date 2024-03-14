@@ -105,7 +105,7 @@
     border-right: 3px solid var(--black);
 }
 
-.tab-content p {
+.tab-content p, .tab-content li {
     font-weight: bold;
     color: var(--black-offset);
 }

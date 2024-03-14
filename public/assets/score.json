@@ -2,433 +2,433 @@
     {
         "class": "animal",
         "display": "animal",
-        "originality": "1",
+        "originality": 0,
         "elaboration": "basic"
     },
     {
         "class": "wheel",
         "display": "wheel",
-        "originality": "1",
+        "originality": 0,
         "elaboration": "basic"
     },
     {
         "class": "fruit",
         "display": "fruit",
-        "originality": "1",
+        "originality": 0,
         "elaboration": "basic"
     },
     {
         "class": "leaf",
         "display": "leaf",
-        "originality": "0",
+        "originality": 0,
         "elaboration": "additional"
     },
     {
         "class": "donut",
         "display": "donut/ christmas wreath",
-        "originality": "1",
+        "originality": 0,
         "elaboration": "basic"
     },
     {
         "class": "insect",
         "display": "insect",
-        "originality": "1",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "human",
         "display": "human",
-        "originality": "1",
+        "originality": 0,
         "elaboration": "basic"
     },
     {
         "class": "flower",
         "display": "flower/ egg",
-        "originality": "1",
+        "originality": 0,
         "elaboration": "basic"
     },
     {
         "class": "sun",
         "display": "sun",
-        "originality": "1",
+        "originality": 0,
         "elaboration": "basic"
     },
     {
         "class": "bicycle",
         "display": "bicycle",
-        "originality": "2",
+        "originality": 3,
         "elaboration": "basic"
     },
     {
         "class": "cloud",
         "display": "cloud",
-        "originality": "0",
+        "originality": 0,
         "elaboration": "additional"
     },
     {
         "class": "button",
         "display": "button/ instruction board/ steering",
-        "originality": "1",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "camera",
         "display": "camera/ machine",
-        "originality": "3",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "cookie",
         "display": "cookie",
-        "originality": "1",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "fan",
         "display": "fan",
-        "originality": "2",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "grass",
         "display": "grass",
-        "originality": "0",
+        "originality": 0,
         "elaboration": "additional"
     },
     {
         "class": "traffic light",
         "display": "traffic light",
-        "originality": "1",
+        "originality": 3,
         "elaboration": "basic"
     },
     {
         "class": "snail",
         "display": "snail",
-        "originality": "3",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "moon",
         "display": "circle",
-        "originality": "0",
+        "originality": 0,
         "elaboration": "basic"
     },
     {
         "class": "eye",
         "display": "eye",
-        "originality": "3",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "pizza",
         "display": "pizza",
-        "originality": "2",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "ribbon",
         "display": "ribbon/ candy",
-        "originality": "2",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "snowman",
         "display": "snowman",
-        "originality": "3",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "water",
         "display": "water",
-        "originality": "0",
+        "originality": 0,
         "elaboration": "additional"
     },
     {
         "class": "balloon",
         "display": "balloon",
-        "originality": "1",
+        "originality":1,
         "elaboration": "basic"
     },
     {
         "class": "magnifying glass",
         "display": "magnifying glass/ paddle",
-        "originality": "2",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "ball",
         "display": "ball/ yin yang",
-        "originality": "1",
+        "originality": 0,
         "elaboration": "basic"
     },
     {
         "class": "bulb",
         "display": "bulb",
-        "originality": "3",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "lollipop",
         "display": "lollipop/ signboard",
-        "originality": "1",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "racket",
         "display": "racket",
-        "originality": "2",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "transport",
         "display": "transport",
-        "originality": "4",
+        "originality": 3,
         "elaboration": "basic"
     },
     {
         "class": "emoji",
         "display": "emoji",
-        "originality": "1",
+        "originality": 0,
         "elaboration": "basic"
     },
     {
         "class": "stickman",
         "display": "stickman",
-        "originality": "1",
+        "originality": 0,
         "elaboration": "basic"
     },
     {
         "class": "canon",
         "display": "canon",
-        "originality": "3",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "phone",
         "display": "phone",
-        "originality": "3",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "key",
         "display": "key",
-        "originality": "2",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "lantern",
         "display": "lantern",
-        "originality": "2",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "planet",
         "display": "planet",
-        "originality": "2",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "star",
         "display": "star",
-        "originality": "0",
+        "originality": 0,
         "elaboration": "additional"
     },
     {
         "class": "cent",
         "display": "cent",
-        "originality": "1",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "fish",
         "display": "fish",
-        "originality": "2",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "ice cream",
         "display": "ice cream",
-        "originality": "2",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "mic",
         "display": "mic",
-        "originality": "1",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "virus",
         "display": "virus/ cell",
-        "originality": "3",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "bee",
         "display": "bee",
-        "originality": "2",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "clock",
         "display": "clock",
-        "originality": "1",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "land",
         "display": "land",
-        "originality": "0",
+        "originality": 0,
         "elaboration": "additional"
     },
     {
         "class": "durian",
         "display": "durian",
-        "originality": "2",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "earth",
         "display": "earth",
-        "originality": "1",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "hot air",
         "display": "hot air balloon",
-        "originality": "2",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "turtle",
         "display": "turtle",
-        "originality": "3",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "alien",
         "display": "alien",
-        "originality": "2",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "bomb",
         "display": "bomb",
-        "originality": "3",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "butterfly",
         "display": "butterlfy",
-        "originality": "2",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "flag",
         "display": "flag",
-        "originality": "3",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "ring",
         "display": "ring",
-        "originality": "1",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "venn diagram",
         "display": "venn diagram/ olympic",
-        "originality": "4",
+        "originality": 3,
         "elaboration": "basic"
     },
     {
         "class": "food",
         "display": "food",
-        "originality": "1",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "octopus",
         "display": "octopus",
-        "originality": "2",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "pineapple",
         "display": "pineapple",
-        "originality": "2",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "rainbow",
         "display": "rainbow",
-        "originality": "0",
+        "originality": 0,
         "elaboration": "additional"
     },
     {
         "class": "accessories",
         "display": "accessories",
-        "originality": "1",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "archery",
         "display": "archery",
-        "originality": "3",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "crystal ball",
         "display": "crystal ball",
-        "originality": "3",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "glasses",
         "display": "glasses",
-        "originality": "3",
+        "originality": 3,
         "elaboration": "basic"
     },
     {
         "class": "string instrument",
         "display": "string instrument",
-        "originality": "3",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "bag",
         "display": "bag",
-        "originality": "1",
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "bird",
         "display": "bird",
-        "originality": "2",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "chrome",
         "display": "chrome",
-        "originality": "1",
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "lightning",
         "display": "lightning",
-        "originality": "0",
+        "originality": 0,
         "elaboration": "additional"
     },
     {
         "class": "rock",
         "display": "rock",
-        "originality": "0",
+        "originality": 0,
         "elaboration": "additional"
     },
     {
         "class": "wind",
         "display": "wind",
-        "originality": "0",
+        "originality": 0,
         "elaboration": "additional"
     }
 ]
