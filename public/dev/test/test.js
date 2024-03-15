@@ -164,7 +164,7 @@ async function fetchResultContent(drawnImageURL, predictionResult) {
         const originalityList0 = finalEval.originality0;
         const originalityList1 = finalEval.originality1;
         const originalityList2 = finalEval.originality2;
-        const originalityList3 = finalEval.originality3;
+        const originalityListAdd = finalEval.originality3;
         const originalityScore = finalEval.originalityScore;
         const elaborationList = finalEval.elaboration;
         const elaborationScore = finalEval.elaborationScore;
@@ -209,7 +209,7 @@ async function fetchResultContent(drawnImageURL, predictionResult) {
                 document.querySelector('#originality-desc-2').innerHTML = "Most unique (+2): " + originalityList2;
                 document.querySelector('#originality-desc-1').innerHTML = "Less common (+1): " + originalityList1;
                 document.querySelector('#originality-desc-0').innerHTML = "Most common (+0): " + originalityList0;
-                document.querySelector('#originality-desc-3').innerHTML = "Additional point (+3): " + originalityList3;
+                document.querySelector('#originality-desc-add').innerHTML = "Additional point (+1): " + originalityListAdd;
 
                 // Set elaboration score
                 document.querySelector('#elaboration-score').innerHTML = elaborationScore + " point(s) (total: 36)";
@@ -225,14 +225,14 @@ async function fetchResultContent(drawnImageURL, predictionResult) {
 async function calculateScore(predictionResult) {
     const maxFluencyScore = 18;
     const maxOriginalityScore = 36;
-    const maxElaborationScore = 36;
+    const maxElaborationScore = 2;
 
     let fluencyList = [];
     let fluencyScore = 0;
     let originalityList0 = [];
     let originalityList1 = [];
     let originalityList2 = [];
-    let originalityList3 = [];
+    let originalityListAdd = [];
     let originalityScore = 0;
     let elaborationList = [];
     let elaborationScore = 0;
@@ -254,12 +254,18 @@ async function calculateScore(predictionResult) {
         originalityList0 = originalityLists.originalityList0;
         originalityList1 = originalityLists.originalityList1;
         originalityList2 = originalityLists.originalityList2;
-        originalityList3 = originalityLists.originalityList3;
+        originalityListAdd = originalityLists.originalityListAdd;
         originalityScore = originalityLists.originalityScore;
 
         // calculate elaboration score
         elaborationList = await calculateElaboration(predictionResult, json);
-        elaborationScore = elaborationList.length;
+        if (elaborationList.length > 5) {
+            elaborationScore = 2;
+        } else if (elaborationList.length > 1) {
+            elaborationScore = 1;
+        } else {
+            elaborationScore = 0;
+        }
 
         finalScore = Math.round((fluencyScore + originalityScore + elaborationScore) / (maxFluencyScore + maxOriginalityScore + maxElaborationScore) * 100);
         const analysis = await scoreAnalysis(finalScore);
@@ -273,7 +279,7 @@ async function calculateScore(predictionResult) {
             originality0: originalityList0,
             originality1: originalityList1,
             originality2: originalityList2,
-            originality3: originalityList3,
+            originality3: originalityListAdd,
             originalityScore: originalityScore,
             elaboration: elaborationList,
             elaborationScore: elaborationScore,
@@ -326,7 +332,8 @@ async function calculateOriginality(fluencyList, originalityScores) {
     let originalityList0 = [];
     let originalityList1 = [];
     let originalityList2 = [];
-    let originalityList3 = [];
+    let originalityListAdd = [];
+    let originalityAdditional = ["bicycle", "traffic light", "transport", "venn diagram/ olympic", "glasses"];
 
     // Loop through each item in fluencyList
     for (let i = 0; i < fluencyList.length; i++) {
@@ -339,10 +346,14 @@ async function calculateOriginality(fluencyList, originalityScores) {
             originalityList0.push(fluencyList[i]);
         } else if (score === 1) {
             originalityList1.push(fluencyList[i]);
-        } else if (score === 2) {
-            originalityList2.push(fluencyList[i]);
         } else {
-            originalityList3.push(fluencyList[i]);
+            originalityList2.push(fluencyList[i]);
+        } 
+
+        // Determine if additional scores should be added
+        if (originalityAdditional.includes(fluencyList[i])) {
+            originalityListAdd.push(fluencyList[i]);
+            originalityScore ++;
         }
     }
 
@@ -351,7 +362,7 @@ async function calculateOriginality(fluencyList, originalityScores) {
         originalityList0: originalityList0,
         originalityList1: originalityList1,
         originalityList2: originalityList2,
-        originalityList3: originalityList3
+        originalityListAdd: originalityListAdd
     };
 }
 
