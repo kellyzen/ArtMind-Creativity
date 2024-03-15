@@ -223,3 +223,18 @@ canvas {
 .fullscreen-btn:hover {
     opacity: 0.7;
 }
+
+@media (max-width: 850px) {
+    .big-box {
+        margin: 0 10vh;
+    }
+
+    .small-box {
+        grid-template-columns: 40% 60%;
+        text-align: center;
+    }
+
+    .fullscreen-btn, .color-palette {
+        margin: 8vh 10vh;
+    }
+}
