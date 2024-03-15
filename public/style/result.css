@@ -115,17 +115,6 @@
     color: var(--black);
 }
 
-.tab-content .content-grid {
-    display: grid;
-    grid-template-columns: 50% 49%;
-    grid-column-gap: 1%;
-    padding: 0;
-}
-
-.tab-content .content-grid ul {
-    padding: 0;
-}
-
 @keyframes bounce {
     25% {
         transform: rotate(90deg) translate(.25rem);
