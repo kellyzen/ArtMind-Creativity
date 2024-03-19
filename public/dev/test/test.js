@@ -31,7 +31,7 @@ function startTimer() {
     if (s == 59) { m = m - 1 }
 
     if (m < 0) {
-        // loadEndModal(); // Countdown time ended
+        loadEndModal(); // Countdown time ended
         return;
     }
 
@@ -144,7 +144,6 @@ async function detectObjects(canvas) {
 
         classesAndConfidences = classesAndConfidences.filter(prediction => prediction.class != "moon");
 
-        console.log("Predictions:", classesAndConfidences);
         return classesAndConfidences;
 
         // Handle predictions as needed

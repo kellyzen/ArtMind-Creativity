@@ -26,7 +26,7 @@
     {
         "class": "donut",
         "display": "donut/ christmas wreath",
-        "originality": 0,
+        "originality": 1,
         "elaboration": "basic"
     },
     {
@@ -38,7 +38,7 @@
     {
         "class": "human",
         "display": "human",
-        "originality": 0,
+        "originality": 1,
         "elaboration": "basic"
     },
     {
@@ -56,7 +56,7 @@
     {
         "class": "bicycle",
         "display": "bicycle",
-        "originality": 3,
+        "originality": 1,
         "elaboration": "basic"
     },
     {
@@ -74,7 +74,7 @@
     {
         "class": "camera",
         "display": "camera/ machine",
-        "originality": 2,
+        "originality": 1,
         "elaboration": "basic"
     },
     {
@@ -98,7 +98,7 @@
     {
         "class": "traffic light",
         "display": "traffic light",
-        "originality": 3,
+        "originality": 2,
         "elaboration": "basic"
     },
     {
@@ -116,13 +116,13 @@
     {
         "class": "eye",
         "display": "eye",
-        "originality": 1,
+        "originality": 2,
         "elaboration": "basic"
     },
     {
         "class": "pizza",
         "display": "pizza",
-        "originality": 1,
+        "originality": 2,
         "elaboration": "basic"
     },
     {
@@ -134,7 +134,7 @@
     {
         "class": "snowman",
         "display": "snowman",
-        "originality": 2,
+        "originality": 1,
         "elaboration": "basic"
     },
     {
@@ -146,7 +146,7 @@
     {
         "class": "balloon",
         "display": "balloon",
-        "originality":1,
+        "originality": 1,
         "elaboration": "basic"
     },
     {
@@ -182,19 +182,19 @@
     {
         "class": "transport",
         "display": "transport",
-        "originality": 3,
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "emoji",
         "display": "emoji",
-        "originality": 0,
+        "originality": 1,
         "elaboration": "basic"
     },
     {
         "class": "stickman",
         "display": "stickman",
-        "originality": 0,
+        "originality": 2,
         "elaboration": "basic"
     },
     {
@@ -242,7 +242,7 @@
     {
         "class": "fish",
         "display": "fish",
-        "originality": 1,
+        "originality": 2,
         "elaboration": "basic"
     },
     {
@@ -284,7 +284,7 @@
     {
         "class": "durian",
         "display": "durian",
-        "originality": 1,
+        "originality": 2,
         "elaboration": "basic"
     },
     {
@@ -308,7 +308,7 @@
     {
         "class": "alien",
         "display": "alien",
-        "originality": 1,
+        "originality": 2,
         "elaboration": "basic"
     },
     {
@@ -326,7 +326,7 @@
     {
         "class": "flag",
         "display": "flag",
-        "originality": 1,
+        "originality": 2,
         "elaboration": "basic"
     },
     {
@@ -338,7 +338,7 @@
     {
         "class": "venn diagram",
         "display": "venn diagram/ olympic",
-        "originality": 3,
+        "originality": 2,
         "elaboration": "basic"
     },
     {
@@ -386,7 +386,7 @@
     {
         "class": "glasses",
         "display": "glasses",
-        "originality": 3,
+        "originality": 1,
         "elaboration": "basic"
     },
     {
@@ -398,7 +398,7 @@
     {
         "class": "bag",
         "display": "bag",
-        "originality": 1,
+        "originality": 2,
         "elaboration": "basic"
     },
     {
