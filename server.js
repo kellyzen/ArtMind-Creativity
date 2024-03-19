@@ -1,6 +1,5 @@
 const express = require('express');
 const fs = require('fs');
-const { createCanvas, loadImage } = require('canvas');
 
 const app = express();
 const port = 3000;

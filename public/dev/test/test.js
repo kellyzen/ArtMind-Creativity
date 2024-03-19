@@ -121,7 +121,7 @@ async function detectObjects(canvas) {
             publishable_key: "rf_UwJWYh9v5YWZoyJfnYP96FteO043"
         }).load({
             model: "artmind-detection",
-            version: 2
+            version: 1
         });
 
         model.configure({
