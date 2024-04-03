@@ -224,7 +224,7 @@ async function fetchResultContent(drawnImageURL, predictionResult) {
 async function calculateScore(predictionResult) {
     const maxFluencyScore = 18;
     const maxOriginalityScore = 36;
-    const maxElaborationScore = 2;
+    const maxElaborationScore = 36;
 
     let fluencyList = [];
     let fluencyScore = 0;
@@ -257,14 +257,9 @@ async function calculateScore(predictionResult) {
         originalityScore = originalityLists.originalityScore;
 
         // calculate elaboration score
-        elaborationList = await calculateElaboration(predictionResult, json);
-        if (elaborationList.length > 5) {
-            elaborationScore = 2;
-        } else if (elaborationList.length > 1) {
-            elaborationScore = 1;
-        } else {
-            elaborationScore = 0;
-        }
+        const elaborationLists = await calculateElaboration(predictionResult, json);
+        elaborationList = elaborationLists.elaborationList;
+        elaborationScore = Math.min(elaborationLists.elaborationScore, fluencyScore);
 
         finalScore = Math.round((fluencyScore + originalityScore + elaborationScore) / (maxFluencyScore + maxOriginalityScore + maxElaborationScore) * 100);
         const analysis = await scoreAnalysis(finalScore);
@@ -347,12 +342,12 @@ async function calculateOriginality(fluencyList, originalityScores) {
             originalityList1.push(fluencyList[i]);
         } else {
             originalityList2.push(fluencyList[i]);
-        } 
+        }
 
         // Determine if additional scores should be added
         if (originalityAdditional.includes(fluencyList[i])) {
             originalityListAdd.push(fluencyList[i]);
-            originalityScore ++;
+            originalityScore++;
         }
     }
 
@@ -367,6 +362,7 @@ async function calculateOriginality(fluencyList, originalityScores) {
 
 async function calculateElaboration(predictionResult, resultJson) {
     const elaborationScores = new Set(); // Use a Set to store unique values
+    let additionalCount = 0;
 
     // Identify top classes with "elaboration": "additional"
     const basicElaborationClasses = resultJson.filter(score => score.elaboration === 'additional').map(score => score.class);
@@ -374,13 +370,17 @@ async function calculateElaboration(predictionResult, resultJson) {
     for (const prediction of predictionResult) {
         if (basicElaborationClasses.includes(prediction.class)) {
             elaborationScores.add(prediction.class); // Add the class to the Set
+            additionalCount++;
         }
     }
 
     // Convert the Set back to an array and append a space to each item
     const elaborationScoresWithSpace = [...elaborationScores].map(item => item + ' ');
 
-    return elaborationScoresWithSpace;
+    return {
+        elaborationList: elaborationScoresWithSpace,
+        elaborationScore: additionalCount
+    };
 }
 
 async function scoreAnalysis(finalScore) {
