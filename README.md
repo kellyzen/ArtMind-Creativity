@@ -1,4 +1,4 @@
-# ArtMind-Creativity
+# ArtMind- Art Analysis Tool for Creativity
 
 ## Introduction
 

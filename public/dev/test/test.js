@@ -327,7 +327,7 @@ async function calculateOriginality(fluencyList, originalityScores) {
     let originalityList1 = [];
     let originalityList2 = [];
     let originalityListAdd = [];
-    let originalityAdditional = ["bicycle", "traffic light", "transport", "venn diagram/ olympic", "glasses"];
+    let originalityAdditional = ["bicycle ", "traffic light ", "transport ", "venn diagram/ olympic ", "glasses "];
 
     // Loop through each item in fluencyList
     for (let i = 0; i < fluencyList.length; i++) {
